@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PyPayMapper">
+  <resultMap id="BaseResultMap" type="model.PyPay">
+    <result column="PAYNO" jdbcType="VARCHAR" property="payno" />
+    <result column="USERNO" jdbcType="VARCHAR" property="userno" />
+    <result column="PAYTYPE" jdbcType="VARCHAR" property="paytype" />
+    <result column="PAYDATE" jdbcType="DATE" property="paydate" />
+    <result column="INVOICE" jdbcType="VARCHAR" property="invoice" />
+    <result column="PAYMONEY" jdbcType="REAL" property="paymoney" />
+    <result column="USEMONEY" jdbcType="REAL" property="usemoney" />
+    <result column="EMPID" jdbcType="INTEGER" property="empid" />
+  </resultMap>
+  <insert id="insert" parameterType="model.PyPay">
+    insert into py_pay (PAYNO, USERNO, PAYTYPE, 
+      PAYDATE, INVOICE, PAYMONEY, 
+      USEMONEY, EMPID)
+    values (#{payno,jdbcType=VARCHAR}, #{userno,jdbcType=VARCHAR}, #{paytype,jdbcType=VARCHAR}, 
+      #{paydate,jdbcType=DATE}, #{invoice,jdbcType=VARCHAR}, #{paymoney,jdbcType=REAL}, 
+      #{usemoney,jdbcType=REAL}, #{empid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="model.PyPay">
+    insert into py_pay
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="payno != null">
+        PAYNO,
+      </if>
+      <if test="userno != null">
+        USERNO,
+      </if>
+      <if test="paytype != null">
+        PAYTYPE,
+      </if>
+      <if test="paydate != null">
+        PAYDATE,
+      </if>
+      <if test="invoice != null">
+        INVOICE,
+      </if>
+      <if test="paymoney != null">
+        PAYMONEY,
+      </if>
+      <if test="usemoney != null">
+        USEMONEY,
+      </if>
+      <if test="empid != null">
+        EMPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="payno != null">
+        #{payno,jdbcType=VARCHAR},
+      </if>
+      <if test="userno != null">
+        #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="paytype != null">
+        #{paytype,jdbcType=VARCHAR},
+      </if>
+      <if test="paydate != null">
+        #{paydate,jdbcType=DATE},
+      </if>
+      <if test="invoice != null">
+        #{invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney != null">
+        #{paymoney,jdbcType=REAL},
+      </if>
+      <if test="usemoney != null">
+        #{usemoney,jdbcType=REAL},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

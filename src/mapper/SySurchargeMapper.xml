@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.SySurchargeMapper">
+  <resultMap id="BaseResultMap" type="model.SySurcharge">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="SURCHARGEID" jdbcType="INTEGER" property="surchargeid" />
+    <result column="WATERTYPEID" jdbcType="INTEGER" property="watertypeid" />
+  </resultMap>
+  <insert id="insert" parameterType="model.SySurcharge">
+    insert into sy_surcharge (ID, SURCHARGEID, WATERTYPEID
+      )
+    values (#{id,jdbcType=INTEGER}, #{surchargeid,jdbcType=INTEGER}, #{watertypeid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.SySurcharge">
+    insert into sy_surcharge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="surchargeid != null">
+        SURCHARGEID,
+      </if>
+      <if test="watertypeid != null">
+        WATERTYPEID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="surchargeid != null">
+        #{surchargeid,jdbcType=INTEGER},
+      </if>
+      <if test="watertypeid != null">
+        #{watertypeid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

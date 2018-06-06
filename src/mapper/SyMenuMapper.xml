@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.SyMenuMapper">
+  <resultMap id="BaseResultMap" type="model.SyMenu">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="MENUNAME" jdbcType="VARCHAR" property="menuname" />
+    <result column="PARENT" jdbcType="INTEGER" property="parent" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="ONCLICK" jdbcType="VARCHAR" property="onclick" />
+    <result column="ICON" jdbcType="VARCHAR" property="icon" />
+    <result column="ORDERINDEX" jdbcType="INTEGER" property="orderindex" />
+    <result column="FLOWID" jdbcType="INTEGER" property="flowid" />
+    <result column="DISABLED" jdbcType="INTEGER" property="disabled" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, MENUNAME, PARENT, URL, ONCLICK, ICON, ORDERINDEX, FLOWID, DISABLED
+  </sql>
+  
+  <select id="findMenu" resultMap="BaseResultMap">
+	select * from SY_Menu
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sy_menu
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sy_menu
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.SyMenu">
+    insert into sy_menu (ID, MENUNAME, PARENT, 
+      URL, ONCLICK, ICON, 
+      ORDERINDEX, FLOWID, DISABLED
+      )
+    values (#{id,jdbcType=INTEGER}, #{menuname,jdbcType=VARCHAR}, #{parent,jdbcType=INTEGER}, 
+      #{url,jdbcType=VARCHAR}, #{onclick,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{orderindex,jdbcType=INTEGER}, #{flowid,jdbcType=INTEGER}, #{disabled,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.SyMenu">
+    insert into sy_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="menuname != null">
+        MENUNAME,
+      </if>
+      <if test="parent != null">
+        PARENT,
+      </if>
+      <if test="url != null">
+        URL,
+      </if>
+      <if test="onclick != null">
+        ONCLICK,
+      </if>
+      <if test="icon != null">
+        ICON,
+      </if>
+      <if test="orderindex != null">
+        ORDERINDEX,
+      </if>
+      <if test="flowid != null">
+        FLOWID,
+      </if>
+      <if test="disabled != null">
+        DISABLED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="menuname != null">
+        #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="parent != null">
+        #{parent,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="onclick != null">
+        #{onclick,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="orderindex != null">
+        #{orderindex,jdbcType=INTEGER},
+      </if>
+      <if test="flowid != null">
+        #{flowid,jdbcType=INTEGER},
+      </if>
+      <if test="disabled != null">
+        #{disabled,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.SyMenu">
+    update sy_menu
+    <set>
+      <if test="menuname != null">
+        MENUNAME = #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="parent != null">
+        PARENT = #{parent,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="onclick != null">
+        ONCLICK = #{onclick,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        ICON = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="orderindex != null">
+        ORDERINDEX = #{orderindex,jdbcType=INTEGER},
+      </if>
+      <if test="flowid != null">
+        FLOWID = #{flowid,jdbcType=INTEGER},
+      </if>
+      <if test="disabled != null">
+        DISABLED = #{disabled,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.SyMenu">
+    update sy_menu
+    set MENUNAME = #{menuname,jdbcType=VARCHAR},
+      PARENT = #{parent,jdbcType=INTEGER},
+      URL = #{url,jdbcType=VARCHAR},
+      ONCLICK = #{onclick,jdbcType=VARCHAR},
+      ICON = #{icon,jdbcType=VARCHAR},
+      ORDERINDEX = #{orderindex,jdbcType=INTEGER},
+      FLOWID = #{flowid,jdbcType=INTEGER},
+      DISABLED = #{disabled,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

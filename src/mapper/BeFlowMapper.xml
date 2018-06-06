@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BeFlowMapper">
+  <resultMap id="BaseResultMap" type="model.BeFlow">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="STEPNAME" jdbcType="VARCHAR" property="stepname" />
+    <result column="deptid" jdbcType="INTEGER" property="deptid" />
+    <result column="type1" jdbcType="INTEGER" property="type1" />
+    <result column="type2" jdbcType="INTEGER" property="type2" />
+    <result column="type3" jdbcType="INTEGER" property="type3" />
+    <result column="type4" jdbcType="INTEGER" property="type4" />
+    <result column="type5" jdbcType="INTEGER" property="type5" />
+    <result column="type6" jdbcType="INTEGER" property="type6" />
+    <result column="type7" jdbcType="INTEGER" property="type7" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, STEPNAME, deptid, type1, type2, type3, type4, type5, type6, type7
+  </sql>
+  
+  <!-- 业扩 1-8 -->
+  <select id="findStepnameByid" resultType="model.BeFlow">
+	select id,stepname from BE_Flow where ID>0
+  </select>
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from be_flow
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from be_flow
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.BeFlow">
+    insert into be_flow (id, STEPNAME, deptid, 
+      type1, type2, type3, 
+      type4, type5, type6, 
+      type7)
+    values (#{id,jdbcType=INTEGER}, #{stepname,jdbcType=VARCHAR}, #{deptid,jdbcType=INTEGER}, 
+      #{type1,jdbcType=INTEGER}, #{type2,jdbcType=INTEGER}, #{type3,jdbcType=INTEGER}, 
+      #{type4,jdbcType=INTEGER}, #{type5,jdbcType=INTEGER}, #{type6,jdbcType=INTEGER}, 
+      #{type7,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="model.BeFlow">
+    insert into be_flow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stepname != null">
+        STEPNAME,
+      </if>
+      <if test="deptid != null">
+        deptid,
+      </if>
+      <if test="type1 != null">
+        type1,
+      </if>
+      <if test="type2 != null">
+        type2,
+      </if>
+      <if test="type3 != null">
+        type3,
+      </if>
+      <if test="type4 != null">
+        type4,
+      </if>
+      <if test="type5 != null">
+        type5,
+      </if>
+      <if test="type6 != null">
+        type6,
+      </if>
+      <if test="type7 != null">
+        type7,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stepname != null">
+        #{stepname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null">
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="type1 != null">
+        #{type1,jdbcType=INTEGER},
+      </if>
+      <if test="type2 != null">
+        #{type2,jdbcType=INTEGER},
+      </if>
+      <if test="type3 != null">
+        #{type3,jdbcType=INTEGER},
+      </if>
+      <if test="type4 != null">
+        #{type4,jdbcType=INTEGER},
+      </if>
+      <if test="type5 != null">
+        #{type5,jdbcType=INTEGER},
+      </if>
+      <if test="type6 != null">
+        #{type6,jdbcType=INTEGER},
+      </if>
+      <if test="type7 != null">
+        #{type7,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.BeFlow">
+    update be_flow
+    <set>
+      <if test="stepname != null">
+        STEPNAME = #{stepname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null">
+        deptid = #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="type1 != null">
+        type1 = #{type1,jdbcType=INTEGER},
+      </if>
+      <if test="type2 != null">
+        type2 = #{type2,jdbcType=INTEGER},
+      </if>
+      <if test="type3 != null">
+        type3 = #{type3,jdbcType=INTEGER},
+      </if>
+      <if test="type4 != null">
+        type4 = #{type4,jdbcType=INTEGER},
+      </if>
+      <if test="type5 != null">
+        type5 = #{type5,jdbcType=INTEGER},
+      </if>
+      <if test="type6 != null">
+        type6 = #{type6,jdbcType=INTEGER},
+      </if>
+      <if test="type7 != null">
+        type7 = #{type7,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.BeFlow">
+    update be_flow
+    set STEPNAME = #{stepname,jdbcType=VARCHAR},
+      deptid = #{deptid,jdbcType=INTEGER},
+      type1 = #{type1,jdbcType=INTEGER},
+      type2 = #{type2,jdbcType=INTEGER},
+      type3 = #{type3,jdbcType=INTEGER},
+      type4 = #{type4,jdbcType=INTEGER},
+      type5 = #{type5,jdbcType=INTEGER},
+      type6 = #{type6,jdbcType=INTEGER},
+      type7 = #{type7,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

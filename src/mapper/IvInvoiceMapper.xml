@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.IvInvoiceMapper">
+  <resultMap id="BaseResultMap" type="model.IvInvoice">
+    <id column="INVOICENO" jdbcType="VARCHAR" property="invoiceno" />
+    <result column="INVOICETYPE" jdbcType="INTEGER" property="invoicetype" />
+    <result column="EMPID" jdbcType="INTEGER" property="empid" />
+    <result column="INID" jdbcType="INTEGER" property="inid" />
+    <result column="OUTID" jdbcType="INTEGER" property="outid" />
+    <result column="ARCHIVEID" jdbcType="INTEGER" property="archiveid" />
+    <result column="USED" jdbcType="INTEGER" property="used" />
+    <result column="USEDATE" jdbcType="DATE" property="usedate" />
+    <result column="INVALID" jdbcType="INTEGER" property="invalid" />
+    <result column="INVALIDDATE" jdbcType="DATE" property="invaliddate" />
+    <result column="ARCHIVED" jdbcType="INTEGER" property="archived" />
+    <result column="ARCHIVEDATE" jdbcType="DATE" property="archivedate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    INVOICENO, INVOICETYPE, EMPID, INID, OUTID, ARCHIVEID, USED, USEDATE, INVALID, INVALIDDATE, 
+    ARCHIVED, ARCHIVEDATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from iv_invoice
+    where INVOICENO = #{invoiceno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from iv_invoice
+    where INVOICENO = #{invoiceno,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="model.IvInvoice">
+    insert into iv_invoice (INVOICENO, INVOICETYPE, EMPID, 
+      INID, OUTID, ARCHIVEID, 
+      USED, USEDATE, INVALID, 
+      INVALIDDATE, ARCHIVED, ARCHIVEDATE
+      )
+    values (#{invoiceno,jdbcType=VARCHAR}, #{invoicetype,jdbcType=INTEGER}, #{empid,jdbcType=INTEGER}, 
+      #{inid,jdbcType=INTEGER}, #{outid,jdbcType=INTEGER}, #{archiveid,jdbcType=INTEGER}, 
+      #{used,jdbcType=INTEGER}, #{usedate,jdbcType=DATE}, #{invalid,jdbcType=INTEGER}, 
+      #{invaliddate,jdbcType=DATE}, #{archived,jdbcType=INTEGER}, #{archivedate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.IvInvoice">
+    insert into iv_invoice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="invoiceno != null">
+        INVOICENO,
+      </if>
+      <if test="invoicetype != null">
+        INVOICETYPE,
+      </if>
+      <if test="empid != null">
+        EMPID,
+      </if>
+      <if test="inid != null">
+        INID,
+      </if>
+      <if test="outid != null">
+        OUTID,
+      </if>
+      <if test="archiveid != null">
+        ARCHIVEID,
+      </if>
+      <if test="used != null">
+        USED,
+      </if>
+      <if test="usedate != null">
+        USEDATE,
+      </if>
+      <if test="invalid != null">
+        INVALID,
+      </if>
+      <if test="invaliddate != null">
+        INVALIDDATE,
+      </if>
+      <if test="archived != null">
+        ARCHIVED,
+      </if>
+      <if test="archivedate != null">
+        ARCHIVEDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="invoiceno != null">
+        #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="invoicetype != null">
+        #{invoicetype,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="inid != null">
+        #{inid,jdbcType=INTEGER},
+      </if>
+      <if test="outid != null">
+        #{outid,jdbcType=INTEGER},
+      </if>
+      <if test="archiveid != null">
+        #{archiveid,jdbcType=INTEGER},
+      </if>
+      <if test="used != null">
+        #{used,jdbcType=INTEGER},
+      </if>
+      <if test="usedate != null">
+        #{usedate,jdbcType=DATE},
+      </if>
+      <if test="invalid != null">
+        #{invalid,jdbcType=INTEGER},
+      </if>
+      <if test="invaliddate != null">
+        #{invaliddate,jdbcType=DATE},
+      </if>
+      <if test="archived != null">
+        #{archived,jdbcType=INTEGER},
+      </if>
+      <if test="archivedate != null">
+        #{archivedate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.IvInvoice">
+    update iv_invoice
+    <set>
+      <if test="invoicetype != null">
+        INVOICETYPE = #{invoicetype,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        EMPID = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="inid != null">
+        INID = #{inid,jdbcType=INTEGER},
+      </if>
+      <if test="outid != null">
+        OUTID = #{outid,jdbcType=INTEGER},
+      </if>
+      <if test="archiveid != null">
+        ARCHIVEID = #{archiveid,jdbcType=INTEGER},
+      </if>
+      <if test="used != null">
+        USED = #{used,jdbcType=INTEGER},
+      </if>
+      <if test="usedate != null">
+        USEDATE = #{usedate,jdbcType=DATE},
+      </if>
+      <if test="invalid != null">
+        INVALID = #{invalid,jdbcType=INTEGER},
+      </if>
+      <if test="invaliddate != null">
+        INVALIDDATE = #{invaliddate,jdbcType=DATE},
+      </if>
+      <if test="archived != null">
+        ARCHIVED = #{archived,jdbcType=INTEGER},
+      </if>
+      <if test="archivedate != null">
+        ARCHIVEDATE = #{archivedate,jdbcType=DATE},
+      </if>
+    </set>
+    where INVOICENO = #{invoiceno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.IvInvoice">
+    update iv_invoice
+    set INVOICETYPE = #{invoicetype,jdbcType=INTEGER},
+      EMPID = #{empid,jdbcType=INTEGER},
+      INID = #{inid,jdbcType=INTEGER},
+      OUTID = #{outid,jdbcType=INTEGER},
+      ARCHIVEID = #{archiveid,jdbcType=INTEGER},
+      USED = #{used,jdbcType=INTEGER},
+      USEDATE = #{usedate,jdbcType=DATE},
+      INVALID = #{invalid,jdbcType=INTEGER},
+      INVALIDDATE = #{invaliddate,jdbcType=DATE},
+      ARCHIVED = #{archived,jdbcType=INTEGER},
+      ARCHIVEDATE = #{archivedate,jdbcType=DATE}
+    where INVOICENO = #{invoiceno,jdbcType=VARCHAR}
+  </update>
+</mapper>

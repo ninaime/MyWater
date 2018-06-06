@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.IvIninvoiceMapper">
+  <resultMap id="BaseResultMap" type="model.IvIninvoice">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="INVOICETYPE" jdbcType="INTEGER" property="invoicetype" />
+    <result column="STARTNO" jdbcType="VARCHAR" property="startno" />
+    <result column="ENDNO" jdbcType="VARCHAR" property="endno" />
+    <result column="COUNTS" jdbcType="INTEGER" property="counts" />
+    <result column="INDATE" jdbcType="DATE" property="indate" />
+    <result column="INEMPID" jdbcType="INTEGER" property="inempid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, INVOICETYPE, STARTNO, ENDNO, COUNTS, INDATE, INEMPID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from iv_ininvoice
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from iv_ininvoice
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.IvIninvoice">
+    insert into iv_ininvoice (ID, INVOICETYPE, STARTNO, 
+      ENDNO, COUNTS, INDATE, 
+      INEMPID)
+    values (#{id,jdbcType=INTEGER}, #{invoicetype,jdbcType=INTEGER}, #{startno,jdbcType=VARCHAR}, 
+      #{endno,jdbcType=VARCHAR}, #{counts,jdbcType=INTEGER}, #{indate,jdbcType=DATE}, 
+      #{inempid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="model.IvIninvoice">
+    insert into iv_ininvoice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="invoicetype != null">
+        INVOICETYPE,
+      </if>
+      <if test="startno != null">
+        STARTNO,
+      </if>
+      <if test="endno != null">
+        ENDNO,
+      </if>
+      <if test="counts != null">
+        COUNTS,
+      </if>
+      <if test="indate != null">
+        INDATE,
+      </if>
+      <if test="inempid != null">
+        INEMPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="invoicetype != null">
+        #{invoicetype,jdbcType=INTEGER},
+      </if>
+      <if test="startno != null">
+        #{startno,jdbcType=VARCHAR},
+      </if>
+      <if test="endno != null">
+        #{endno,jdbcType=VARCHAR},
+      </if>
+      <if test="counts != null">
+        #{counts,jdbcType=INTEGER},
+      </if>
+      <if test="indate != null">
+        #{indate,jdbcType=DATE},
+      </if>
+      <if test="inempid != null">
+        #{inempid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.IvIninvoice">
+    update iv_ininvoice
+    <set>
+      <if test="invoicetype != null">
+        INVOICETYPE = #{invoicetype,jdbcType=INTEGER},
+      </if>
+      <if test="startno != null">
+        STARTNO = #{startno,jdbcType=VARCHAR},
+      </if>
+      <if test="endno != null">
+        ENDNO = #{endno,jdbcType=VARCHAR},
+      </if>
+      <if test="counts != null">
+        COUNTS = #{counts,jdbcType=INTEGER},
+      </if>
+      <if test="indate != null">
+        INDATE = #{indate,jdbcType=DATE},
+      </if>
+      <if test="inempid != null">
+        INEMPID = #{inempid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.IvIninvoice">
+    update iv_ininvoice
+    set INVOICETYPE = #{invoicetype,jdbcType=INTEGER},
+      STARTNO = #{startno,jdbcType=VARCHAR},
+      ENDNO = #{endno,jdbcType=VARCHAR},
+      COUNTS = #{counts,jdbcType=INTEGER},
+      INDATE = #{indate,jdbcType=DATE},
+      INEMPID = #{inempid,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PySumreportMapper">
+  <resultMap id="BaseResultMap" type="model.PySumreport">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="TYPEE" jdbcType="INTEGER" property="typee" />
+    <result column="REPORTYEAR" jdbcType="INTEGER" property="reportyear" />
+    <result column="REPORTMONTH" jdbcType="INTEGER" property="reportmonth" />
+    <result column="LINENO" jdbcType="INTEGER" property="lineno" />
+    <result column="C1" jdbcType="VARCHAR" property="c1" />
+    <result column="C2" jdbcType="VARCHAR" property="c2" />
+    <result column="C3" jdbcType="VARCHAR" property="c3" />
+    <result column="C4" jdbcType="VARCHAR" property="c4" />
+    <result column="C5" jdbcType="VARCHAR" property="c5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, TYPEE, REPORTYEAR, REPORTMONTH, LINENO, C1, C2, C3, C4, C5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from py_sumreport
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from py_sumreport
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.PySumreport">
+    insert into py_sumreport (ID, TYPEE, REPORTYEAR, 
+      REPORTMONTH, LINENO, C1, 
+      C2, C3, C4, C5
+      )
+    values (#{id,jdbcType=INTEGER}, #{typee,jdbcType=INTEGER}, #{reportyear,jdbcType=INTEGER}, 
+      #{reportmonth,jdbcType=INTEGER}, #{lineno,jdbcType=INTEGER}, #{c1,jdbcType=VARCHAR}, 
+      #{c2,jdbcType=VARCHAR}, #{c3,jdbcType=VARCHAR}, #{c4,jdbcType=VARCHAR}, #{c5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.PySumreport">
+    insert into py_sumreport
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="typee != null">
+        TYPEE,
+      </if>
+      <if test="reportyear != null">
+        REPORTYEAR,
+      </if>
+      <if test="reportmonth != null">
+        REPORTMONTH,
+      </if>
+      <if test="lineno != null">
+        LINENO,
+      </if>
+      <if test="c1 != null">
+        C1,
+      </if>
+      <if test="c2 != null">
+        C2,
+      </if>
+      <if test="c3 != null">
+        C3,
+      </if>
+      <if test="c4 != null">
+        C4,
+      </if>
+      <if test="c5 != null">
+        C5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typee != null">
+        #{typee,jdbcType=INTEGER},
+      </if>
+      <if test="reportyear != null">
+        #{reportyear,jdbcType=INTEGER},
+      </if>
+      <if test="reportmonth != null">
+        #{reportmonth,jdbcType=INTEGER},
+      </if>
+      <if test="lineno != null">
+        #{lineno,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null">
+        #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null">
+        #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null">
+        #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null">
+        #{c4,jdbcType=VARCHAR},
+      </if>
+      <if test="c5 != null">
+        #{c5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.PySumreport">
+    update py_sumreport
+    <set>
+      <if test="typee != null">
+        TYPEE = #{typee,jdbcType=INTEGER},
+      </if>
+      <if test="reportyear != null">
+        REPORTYEAR = #{reportyear,jdbcType=INTEGER},
+      </if>
+      <if test="reportmonth != null">
+        REPORTMONTH = #{reportmonth,jdbcType=INTEGER},
+      </if>
+      <if test="lineno != null">
+        LINENO = #{lineno,jdbcType=INTEGER},
+      </if>
+      <if test="c1 != null">
+        C1 = #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null">
+        C2 = #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null">
+        C3 = #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null">
+        C4 = #{c4,jdbcType=VARCHAR},
+      </if>
+      <if test="c5 != null">
+        C5 = #{c5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.PySumreport">
+    update py_sumreport
+    set TYPEE = #{typee,jdbcType=INTEGER},
+      REPORTYEAR = #{reportyear,jdbcType=INTEGER},
+      REPORTMONTH = #{reportmonth,jdbcType=INTEGER},
+      LINENO = #{lineno,jdbcType=INTEGER},
+      C1 = #{c1,jdbcType=VARCHAR},
+      C2 = #{c2,jdbcType=VARCHAR},
+      C3 = #{c3,jdbcType=VARCHAR},
+      C4 = #{c4,jdbcType=VARCHAR},
+      C5 = #{c5,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

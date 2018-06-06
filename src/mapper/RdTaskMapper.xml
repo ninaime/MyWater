@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.RdTaskMapper">
+  <resultMap id="BaseResultMap" type="model.RdTask">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="READYEAR" jdbcType="INTEGER" property="readyear" />
+    <result column="READMONTH" jdbcType="INTEGER" property="readmonth" />
+    <result column="VOLUMEID" jdbcType="INTEGER" property="volumeid" />
+    <result column="EMPID" jdbcType="INTEGER" property="empid" />
+  </resultMap>
+  <insert id="insert" parameterType="model.RdTask">
+    insert into rd_task (ID, READYEAR, READMONTH, 
+      VOLUMEID, EMPID)
+    values (#{id,jdbcType=INTEGER}, #{readyear,jdbcType=INTEGER}, #{readmonth,jdbcType=INTEGER}, 
+      #{volumeid,jdbcType=INTEGER}, #{empid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="model.RdTask">
+    insert into rd_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="readyear != null">
+        READYEAR,
+      </if>
+      <if test="readmonth != null">
+        READMONTH,
+      </if>
+      <if test="volumeid != null">
+        VOLUMEID,
+      </if>
+      <if test="empid != null">
+        EMPID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="readyear != null">
+        #{readyear,jdbcType=INTEGER},
+      </if>
+      <if test="readmonth != null">
+        #{readmonth,jdbcType=INTEGER},
+      </if>
+      <if test="volumeid != null">
+        #{volumeid,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

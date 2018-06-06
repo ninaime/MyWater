@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd 
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+        
+	<!-- 放行静态资源 -->  
+	<mvc:default-servlet-handler />
+	
+	<!-- 开启扫描功能 -->
+	<context:annotation-config/>
+	<context:component-scan base-package="*.service,util,test" />
+	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->	 
+	<context:component-scan base-package="*.controller">
+		<context:include-filter type="annotation" 
+		expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<!-- 解析@Controller -->
+	<mvc:annotation-driven />
+	
+	
+	
+	<!-- 定义切面功能 -->
+	<aop:aspectj-autoproxy />
+	
+	 <!--  mybatis的SqlSession的工厂: SqlSessionFactoryBean dataSource:引用数据源  -->  
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="typeAliasesPackage" value="model" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:mapper/*.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="mapper"/>
+	</bean>
+
+	<!-- 数据源 : DriverManagerDataSource -->  
+    <bean id="dataSource"  
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />  
+        <property name="url" value="jdbc:mysql://localhost:3306/water?characterEncoding=UTF-8" />  
+        <property name="username" value="root" />  
+        <property name="password" value="123" />
+    </bean>  
+	
+  	<!-- 支持事务注解的（@Transactional） -->
+	<tx:annotation-driven />
+    <!-- 事务管理 : DataSourceTransactionManager dataSource:引用上面定义的数据源 -->  
+    <bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<tx:advice id="txadvice" transaction-manager="transactionManager">  
+        <tx:attributes>  
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception" />  
+            <tx:method name="del*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="edit*" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>  
+            <tx:method name="list*" propagation="REQUIRED" rollback-for="Exception"/>  
+        </tx:attributes>  
+    </tx:advice>
+    
+    <aop:config>  
+        <aop:pointcut id="serviceMethod" expression="execution(* com.service.*.*(..))"/>  
+        <!-- pointcut 切入点  advice 横切面 -->
+        <aop:advisor pointcut-ref="serviceMethod" advice-ref="txadvice"/>  
+    </aop:config> 
+	
+	
+	<!-- json解析 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    	<property name="messageConverters">
+    		<list>
+    			<ref bean="mappingJackson2HttpMessageConverter"/>
+    		</list>
+    	</property>
+    </bean>
+    <bean id="mappingJackson2HttpMessageConverter"
+    	class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    	<property name="supportedMediaTypes">
+    		<list>
+    			<value>text/html;charset=UTF-8</value>
+    			<value>text/json;charset=UTF-8</value>
+    			<value></value>
+    		</list>
+    	</property>
+    </bean>
+	
+
+
+    <!-- 视图 -->
+	<bean  
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+			<property name="viewClass"  
+			value="org.springframework.web.servlet.view.JstlView"/>
+			<property name="contentType" value="text/html;charset=UTF-8"></property>
+			<property name="prefix" value="/"/>  
+			<property name="suffix" value=".jsp"/>  
+	</bean>  
+
+    
+</beans>  

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BeApplyMapper">
+  <select id="count" parameterType="java.lang.Integer" resultType="int">
+	SELECT count(*) from (select StepName,OrderNo,OrderType,StepID,LastEditDate,UserName,DeptName,OrderName 
+	from BE_Order,SY_Dept,BE_Flow,BE_OrderType 
+	where BE_Order.Stepid=BE_Flow.Id  and  
+	BE_Flow.Deptid=SY_Dept.Id and BE_OrderType.Orderid=BE_Order.OrderType 
+	and StepID=#{id})as apply
+  </select>
+
+  <select id="findAll" parameterType="java.lang.Integer" resultType="model.BeApply">
+  	SELECT * from(
+	select StepName,OrderNo,OrderType,StepID,LastEditDate,UserName,DeptName,OrderName from 
+	BE_Order,SY_Dept,BE_Flow,BE_OrderType where BE_Order.Stepid=BE_Flow.Id  and  BE_Flow.Deptid=SY_Dept.Id 
+	and BE_OrderType.Orderid=BE_Order.OrderType and StepID=#{id}) as apply
+  </select>
+
+  <!-- 业扩工程进度 -->
+  <select id="findExpand" resultType="model.BeApply">
+	select orderType type,stepId step,count(orderType) typecount from  BE_Order group by stepId,orderType;
+  </select>
+  
+  <!-- 待办总数根据工单类型   分组-->
+  <select id="findExpandByType" resultType="model.BeApply">
+	select orderType type,count(orderType) typecount from  BE_Order where stepId not in(-1,0) group by orderType
+  </select>
+  
+  <!--总数根据当前步骤ID  分组-->
+  <select id="findExpandByid" resultType="model.BeApply">
+	select stepId step,count(stepId) stepcount from  BE_Order group by stepId
+  </select>
+  
+  <!-- 工单完成    分组-->
+  <select id="findExpandByCG" resultType="model.BeApply">
+	select orderType type,count(orderType) typecount from  BE_Order where stepId in(0) group by orderType
+  </select>
+  
+  <!-- 工单终止   分组-->
+  <select id="findExpandByEnd" resultType="model.BeApply">
+	select orderType leix,count(orderType) leixCount from  BE_Order where stepId in(-1) group by orderType
+  </select>
+
+</mapper>

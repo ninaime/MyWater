@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UsFormulaMapper">
+  <resultMap id="BaseResultMap" type="model.UsFormula">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="USERNO" jdbcType="VARCHAR" property="userno" />
+    <result column="WATERTYPECODE" jdbcType="VARCHAR" property="watertypecode" />
+    <result column="ALLOTTEXT" jdbcType="VARCHAR" property="allottext" />
+    <result column="ALLOTTYPE" jdbcType="INTEGER" property="allottype" />
+    <result column="ALLOTVALUE" jdbcType="INTEGER" property="allotvalue" />
+  </resultMap>
+  <insert id="insert" parameterType="model.UsFormula">
+    insert into us_formula (ID, USERNO, WATERTYPECODE, 
+      ALLOTTEXT, ALLOTTYPE, ALLOTVALUE
+      )
+    values (#{id,jdbcType=INTEGER}, #{userno,jdbcType=VARCHAR}, #{watertypecode,jdbcType=VARCHAR}, 
+      #{allottext,jdbcType=VARCHAR}, #{allottype,jdbcType=INTEGER}, #{allotvalue,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.UsFormula">
+    insert into us_formula
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userno != null">
+        USERNO,
+      </if>
+      <if test="watertypecode != null">
+        WATERTYPECODE,
+      </if>
+      <if test="allottext != null">
+        ALLOTTEXT,
+      </if>
+      <if test="allottype != null">
+        ALLOTTYPE,
+      </if>
+      <if test="allotvalue != null">
+        ALLOTVALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userno != null">
+        #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="watertypecode != null">
+        #{watertypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="allottext != null">
+        #{allottext,jdbcType=VARCHAR},
+      </if>
+      <if test="allottype != null">
+        #{allottype,jdbcType=INTEGER},
+      </if>
+      <if test="allotvalue != null">
+        #{allotvalue,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

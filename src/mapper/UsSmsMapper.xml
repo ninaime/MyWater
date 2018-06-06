@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UsSmsMapper">
+  <resultMap id="BaseResultMap" type="model.UsSms">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="SENDTIME" jdbcType="DATE" property="sendtime" />
+    <result column="EMPID" jdbcType="INTEGER" property="empid" />
+    <result column="MESSAGE" jdbcType="VARCHAR" property="message" />
+    <result column="TYPEE" jdbcType="INTEGER" property="typee" />
+  </resultMap>
+  <insert id="insert" parameterType="model.UsSms">
+    insert into us_sms (ID, SENDTIME, EMPID, 
+      MESSAGE, TYPEE)
+    values (#{id,jdbcType=INTEGER}, #{sendtime,jdbcType=DATE}, #{empid,jdbcType=INTEGER}, 
+      #{message,jdbcType=VARCHAR}, #{typee,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="model.UsSms">
+    insert into us_sms
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="sendtime != null">
+        SENDTIME,
+      </if>
+      <if test="empid != null">
+        EMPID,
+      </if>
+      <if test="message != null">
+        MESSAGE,
+      </if>
+      <if test="typee != null">
+        TYPEE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sendtime != null">
+        #{sendtime,jdbcType=DATE},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="typee != null">
+        #{typee,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

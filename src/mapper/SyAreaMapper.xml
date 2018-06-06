@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.SyAreaMapper">
+  <resultMap id="BaseResultMap" type="model.SyArea">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="AREANAME" jdbcType="VARCHAR" property="areaname" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="DISABLED" jdbcType="INTEGER" property="disabled" />
+  </resultMap>
+  
+  <!-- 添加 -->
+  <insert id="addArea" parameterType="model.SyArea">
+	insert into Sy_area(areaName,remark,disabled)
+	values(#{areaname},#{remark},0)
+  </insert>
+  
+  <!-- 删除就是把窗台修改为1 -->
+  <update id="delArea" parameterType="int">
+	update Sy_area set disabled=1 where id=#{id}
+  </update>
+  
+  <!-- 根据ID查询 -->
+  <select id="findById" parameterType="int" resultType="model.SyArea">
+	select * from Sy_area where id=#{id}
+  </select>
+  
+  <!-- 修改 -->
+  <update id="updArea" parameterType="model.SyArea">
+	update Sy_area set areaName=#{areaname},remark=#{remark} where id=#{id}
+  </update>
+  
+  <!-- 总条数 -->
+  <select id="count" resultType="int">
+	select count(*) from  Sy_area where disabled=0
+  </select>
+  
+  <!-- 查询全部 -->
+  <select id="findAll" resultType="model.SyArea" parameterType="model.Page">
+	select * from Sy_area where disabled=0 LIMIT #{start},#{count}
+  </select>
+  
+  <insert id="insert" parameterType="model.SyArea">
+    insert into sy_area (ID, AREANAME, REMARK, 
+      DISABLED)
+    values (#{id,jdbcType=INTEGER}, #{areaname,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{disabled,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="model.SyArea">
+    insert into sy_area
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="areaname != null">
+        AREANAME,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="disabled != null">
+        DISABLED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="areaname != null">
+        #{areaname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        #{disabled,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

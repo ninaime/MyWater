@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.SyEmpareapowerMapper">
+  <resultMap id="BaseResultMap" type="model.SyEmpareapower">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="EMPID" jdbcType="INTEGER" property="empid" />
+    <result column="AREAID" jdbcType="INTEGER" property="areaid" />
+  </resultMap>
+  <insert id="insert" parameterType="model.SyEmpareapower">
+    insert into sy_empareapower (ID, EMPID, AREAID
+      )
+    values (#{id,jdbcType=INTEGER}, #{empid,jdbcType=INTEGER}, #{areaid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.SyEmpareapower">
+    insert into sy_empareapower
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="empid != null">
+        EMPID,
+      </if>
+      <if test="areaid != null">
+        AREAID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="areaid != null">
+        #{areaid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

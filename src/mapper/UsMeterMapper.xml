@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UsMeterMapper">
+  <resultMap id="BaseResultMap" type="model.UsMeter">
+    <result column="METERNO" jdbcType="VARCHAR" property="meterno" />
+    <result column="USERNO" jdbcType="VARCHAR" property="userno" />
+    <result column="METERNAME" jdbcType="VARCHAR" property="metername" />
+    <result column="METERTYPEID" jdbcType="INTEGER" property="metertypeid" />
+    <result column="MAXVALUE1" jdbcType="INTEGER" property="maxvalue1" />
+    <result column="STARTVALUE" jdbcType="INTEGER" property="startvalue" />
+    <result column="SETUPDATE" jdbcType="DATE" property="setupdate" />
+    <result column="FACTORY" jdbcType="VARCHAR" property="factory" />
+    <result column="DISABLED" jdbcType="INTEGER" property="disabled" />
+  </resultMap>
+  <insert id="insert" parameterType="model.UsMeter">
+    insert into us_meter (METERNO, USERNO, METERNAME, 
+      METERTYPEID, MAXVALUE1, STARTVALUE, 
+      SETUPDATE, FACTORY, DISABLED
+      )
+    values (#{meterno,jdbcType=VARCHAR}, #{userno,jdbcType=VARCHAR}, #{metername,jdbcType=VARCHAR}, 
+      #{metertypeid,jdbcType=INTEGER}, #{maxvalue1,jdbcType=INTEGER}, #{startvalue,jdbcType=INTEGER}, 
+      #{setupdate,jdbcType=DATE}, #{factory,jdbcType=VARCHAR}, #{disabled,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.UsMeter">
+    insert into us_meter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="meterno != null">
+        METERNO,
+      </if>
+      <if test="userno != null">
+        USERNO,
+      </if>
+      <if test="metername != null">
+        METERNAME,
+      </if>
+      <if test="metertypeid != null">
+        METERTYPEID,
+      </if>
+      <if test="maxvalue1 != null">
+        MAXVALUE1,
+      </if>
+      <if test="startvalue != null">
+        STARTVALUE,
+      </if>
+      <if test="setupdate != null">
+        SETUPDATE,
+      </if>
+      <if test="factory != null">
+        FACTORY,
+      </if>
+      <if test="disabled != null">
+        DISABLED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="meterno != null">
+        #{meterno,jdbcType=VARCHAR},
+      </if>
+      <if test="userno != null">
+        #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="metername != null">
+        #{metername,jdbcType=VARCHAR},
+      </if>
+      <if test="metertypeid != null">
+        #{metertypeid,jdbcType=INTEGER},
+      </if>
+      <if test="maxvalue1 != null">
+        #{maxvalue1,jdbcType=INTEGER},
+      </if>
+      <if test="startvalue != null">
+        #{startvalue,jdbcType=INTEGER},
+      </if>
+      <if test="setupdate != null">
+        #{setupdate,jdbcType=DATE},
+      </if>
+      <if test="factory != null">
+        #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        #{disabled,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

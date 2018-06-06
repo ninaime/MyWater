@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.SyEmpMapper">
+  <resultMap id="BaseResultMap" type="model.SyEmp">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    <result column="EMPNO" jdbcType="VARCHAR" property="empno" />
+    <result column="PWD" jdbcType="VARCHAR" property="pwd" />
+    <result column="DEPTID" jdbcType="INTEGER" property="deptid" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="DISABLED" jdbcType="INTEGER" property="disabled" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, EMPNAME, EMPNO, PWD, DEPTID, REMARK, DISABLED
+  </sql>
+  
+  <select id="findEmpByName" parameterType="String" resultType="int">
+  		select id from SY_Emp where empName=#{empname}
+  </select>
+  
+  <select id="findEmp" parameterType="java.lang.Integer" resultType="model.SyEmp">
+	select * from SY_Emp where id!=#{id}
+  </select>
+  
+  <select id="findEmpById" parameterType="java.lang.Integer" resultType="model.SyEmp">
+	select * from SY_Emp where id=#{id}
+  </select>
+  
+  <update id="updateEmpPwd" parameterType="model.SyEmp">
+    update sy_emp
+    <set>
+      <if test="pwd != null">
+        PWD = #{pwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="existsPwd" parameterType="model.SyEmp" resultType="model.SyEmp">
+	select * from SY_Emp where id=#{id} and Pwd=#{pwd}
+  </select>
+  
+  <select id="findRegister" parameterType="model.SyEmp" resultType="model.SyEmp">
+	select * from SY_Emp where EmpNo=#{empno} and Pwd=#{pwd}
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sy_emp
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sy_emp
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.SyEmp">
+    insert into sy_emp (ID, EMPNAME, EMPNO, 
+      PWD, DEPTID, REMARK, 
+      DISABLED)
+    values (#{id,jdbcType=INTEGER}, #{empname,jdbcType=VARCHAR}, #{empno,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{deptid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{disabled,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="model.SyEmp">
+    insert into sy_emp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="empname != null">
+        EMPNAME,
+      </if>
+      <if test="empno != null">
+        EMPNO,
+      </if>
+      <if test="pwd != null">
+        PWD,
+      </if>
+      <if test="deptid != null">
+        DEPTID,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="disabled != null">
+        DISABLED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="empname != null">
+        #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="empno != null">
+        #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null">
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        #{disabled,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.SyEmp">
+    update sy_emp
+    <set>
+      <if test="empname != null">
+        EMPNAME = #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="empno != null">
+        EMPNO = #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        PWD = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="deptid != null">
+        DEPTID = #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        DISABLED = #{disabled,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.SyEmp">
+    update sy_emp
+    set EMPNAME = #{empname,jdbcType=VARCHAR},
+      EMPNO = #{empno,jdbcType=VARCHAR},
+      PWD = #{pwd,jdbcType=VARCHAR},
+      DEPTID = #{deptid,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DISABLED = #{disabled,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

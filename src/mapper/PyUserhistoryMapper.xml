@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PyUserhistoryMapper">
+  <resultMap id="BaseResultMap" type="model.PyUserhistory">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="USERNO" jdbcType="VARCHAR" property="userno" />
+    <result column="TYPEE" jdbcType="INTEGER" property="typee" />
+    <result column="ORDERNO" jdbcType="VARCHAR" property="orderno" />
+    <result column="DATEE" jdbcType="DATE" property="datee" />
+    <result column="PREVALUE" jdbcType="INTEGER" property="prevalue" />
+    <result column="CURVALUE" jdbcType="INTEGER" property="curvalue" />
+    <result column="AMOUNT" jdbcType="INTEGER" property="amount" />
+    <result column="BILLMONEY" jdbcType="REAL" property="billmoney" />
+    <result column="PAYMONEY" jdbcType="REAL" property="paymoney" />
+    <result column="USERMONEY" jdbcType="REAL" property="usermoney" />
+  </resultMap>
+  <insert id="insert" parameterType="model.PyUserhistory">
+    insert into py_userhistory (ID, USERNO, TYPEE, 
+      ORDERNO, DATEE, PREVALUE, 
+      CURVALUE, AMOUNT, BILLMONEY, 
+      PAYMONEY, USERMONEY)
+    values (#{id,jdbcType=INTEGER}, #{userno,jdbcType=VARCHAR}, #{typee,jdbcType=INTEGER}, 
+      #{orderno,jdbcType=VARCHAR}, #{datee,jdbcType=DATE}, #{prevalue,jdbcType=INTEGER}, 
+      #{curvalue,jdbcType=INTEGER}, #{amount,jdbcType=INTEGER}, #{billmoney,jdbcType=REAL}, 
+      #{paymoney,jdbcType=REAL}, #{usermoney,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="model.PyUserhistory">
+    insert into py_userhistory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userno != null">
+        USERNO,
+      </if>
+      <if test="typee != null">
+        TYPEE,
+      </if>
+      <if test="orderno != null">
+        ORDERNO,
+      </if>
+      <if test="datee != null">
+        DATEE,
+      </if>
+      <if test="prevalue != null">
+        PREVALUE,
+      </if>
+      <if test="curvalue != null">
+        CURVALUE,
+      </if>
+      <if test="amount != null">
+        AMOUNT,
+      </if>
+      <if test="billmoney != null">
+        BILLMONEY,
+      </if>
+      <if test="paymoney != null">
+        PAYMONEY,
+      </if>
+      <if test="usermoney != null">
+        USERMONEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userno != null">
+        #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="typee != null">
+        #{typee,jdbcType=INTEGER},
+      </if>
+      <if test="orderno != null">
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="datee != null">
+        #{datee,jdbcType=DATE},
+      </if>
+      <if test="prevalue != null">
+        #{prevalue,jdbcType=INTEGER},
+      </if>
+      <if test="curvalue != null">
+        #{curvalue,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="billmoney != null">
+        #{billmoney,jdbcType=REAL},
+      </if>
+      <if test="paymoney != null">
+        #{paymoney,jdbcType=REAL},
+      </if>
+      <if test="usermoney != null">
+        #{usermoney,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BeHistoryMapper">
+  <resultMap id="BaseResultMap" type="model.BeHistory">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="orderNo" jdbcType="VARCHAR" property="orderno" />
+    <result column="STEPID" jdbcType="INTEGER" property="stepid" />
+    <result column="DATEE" jdbcType="DATE" property="datee" />
+    <result column="EMPID" jdbcType="INTEGER" property="empid" />
+    <result column="isBack" jdbcType="INTEGER" property="isback" />
+    <result column="dateeTime" jdbcType="VARCHAR" property="dateetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, orderNo, STEPID, DATEE, EMPID, isBack, dateeTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from be_history
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from be_history
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="addBeHistory" parameterType="model.BeHistory">
+    insert into be_history (id, orderNo, STEPID, 
+      DATEE, EMPID, isBack, 
+      dateeTime)
+    values (#{id,jdbcType=INTEGER}, #{orderno,jdbcType=VARCHAR}, #{stepid,jdbcType=INTEGER}, 
+      #{datee,jdbcType=DATE}, #{empid,jdbcType=INTEGER}, #{isback,jdbcType=INTEGER}, 
+      #{dateetime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="model.BeHistory">
+    insert into be_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderno != null">
+        orderNo,
+      </if>
+      <if test="stepid != null">
+        STEPID,
+      </if>
+      <if test="datee != null">
+        DATEE,
+      </if>
+      <if test="empid != null">
+        EMPID,
+      </if>
+      <if test="isback != null">
+        isBack,
+      </if>
+      <if test="dateetime != null">
+        dateeTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderno != null">
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="stepid != null">
+        #{stepid,jdbcType=INTEGER},
+      </if>
+      <if test="datee != null">
+        #{datee,jdbcType=DATE},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="isback != null">
+        #{isback,jdbcType=INTEGER},
+      </if>
+      <if test="dateetime != null">
+        #{dateetime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.BeHistory">
+    update be_history
+    <set>
+      <if test="orderno != null">
+        orderNo = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="stepid != null">
+        STEPID = #{stepid,jdbcType=INTEGER},
+      </if>
+      <if test="datee != null">
+        DATEE = #{datee,jdbcType=DATE},
+      </if>
+      <if test="empid != null">
+        EMPID = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="isback != null">
+        isBack = #{isback,jdbcType=INTEGER},
+      </if>
+      <if test="dateetime != null">
+        dateeTime = #{dateetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.BeHistory">
+    update be_history
+    set orderNo = #{orderno,jdbcType=VARCHAR},
+      STEPID = #{stepid,jdbcType=INTEGER},
+      DATEE = #{datee,jdbcType=DATE},
+      EMPID = #{empid,jdbcType=INTEGER},
+      isBack = #{isback,jdbcType=INTEGER},
+      dateeTime = #{dateetime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

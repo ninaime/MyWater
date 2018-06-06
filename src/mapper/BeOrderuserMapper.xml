@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BeOrderuserMapper">
+  <resultMap id="BaseResultMap" type="model.BeOrderuser">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="ORDERNO" jdbcType="VARCHAR" property="orderno" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="SMSPHONE" jdbcType="VARCHAR" property="smsphone" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="PROJECTMONEY" jdbcType="REAL" property="projectmoney" />
+    <result column="REALMONEY" jdbcType="REAL" property="realmoney" />
+    <result column="INVOICENO" jdbcType="VARCHAR" property="invoiceno" />
+    <result column="FORMULA" jdbcType="VARCHAR" property="formula" />
+    <result column="CONTRACTNUM" jdbcType="VARCHAR" property="contractnum" />
+    <result column="METERTYPEID" jdbcType="INTEGER" property="metertypeid" />
+    <result column="METERNAME" jdbcType="VARCHAR" property="metername" />
+    <result column="MAXVALUE1" jdbcType="INTEGER" property="maxvalue1" />
+    <result column="STARTVALUE" jdbcType="INTEGER" property="startvalue" />
+    <result column="METERFACTORY" jdbcType="VARCHAR" property="meterfactory" />
+    <result column="DOCNUM" jdbcType="VARCHAR" property="docnum" />
+    <result column="USERNO" jdbcType="VARCHAR" property="userno" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ORDERNO, USERNAME, PHONE, SMSPHONE, ADDRESS, PROJECTMONEY, REALMONEY, INVOICENO, 
+    FORMULA, CONTRACTNUM, METERTYPEID, METERNAME, MAXVALUE1, STARTVALUE, METERFACTORY, 
+    DOCNUM, USERNO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from be_orderuser
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from be_orderuser
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insertSelective" parameterType="model.BeOrderuser">
+    insert into be_orderuser (ID, ORDERNO, USERNAME, 
+      PHONE, SMSPHONE, ADDRESS, 
+      PROJECTMONEY, REALMONEY, INVOICENO, 
+      FORMULA, CONTRACTNUM, METERTYPEID, 
+      METERNAME, MAXVALUE1, STARTVALUE, 
+      METERFACTORY, DOCNUM, USERNO
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderno,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{smsphone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{projectmoney,jdbcType=REAL}, #{realmoney,jdbcType=REAL}, #{invoiceno,jdbcType=VARCHAR}, 
+      #{formula,jdbcType=VARCHAR}, #{contractnum,jdbcType=VARCHAR}, #{metertypeid,jdbcType=INTEGER}, 
+      #{metername,jdbcType=VARCHAR}, #{maxvalue1,jdbcType=INTEGER}, #{startvalue,jdbcType=INTEGER}, 
+      #{meterfactory,jdbcType=VARCHAR}, #{docnum,jdbcType=VARCHAR}, #{userno,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="addBeOrderuser" parameterType="model.BeOrderuser">
+    insert into be_orderuser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="orderno != null">
+        ORDERNO,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="smsphone != null">
+        SMSPHONE,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="projectmoney != null">
+        PROJECTMONEY,
+      </if>
+      <if test="realmoney != null">
+        REALMONEY,
+      </if>
+      <if test="invoiceno != null">
+        INVOICENO,
+      </if>
+      <if test="formula != null">
+        FORMULA,
+      </if>
+      <if test="contractnum != null">
+        CONTRACTNUM,
+      </if>
+      <if test="metertypeid != null">
+        METERTYPEID,
+      </if>
+      <if test="metername != null">
+        METERNAME,
+      </if>
+      <if test="maxvalue1 != null">
+        MAXVALUE1,
+      </if>
+      <if test="startvalue != null">
+        STARTVALUE,
+      </if>
+      <if test="meterfactory != null">
+        METERFACTORY,
+      </if>
+      <if test="docnum != null">
+        DOCNUM,
+      </if>
+      <if test="userno != null">
+        USERNO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderno != null">
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="smsphone != null">
+        #{smsphone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="projectmoney != null">
+        #{projectmoney,jdbcType=REAL},
+      </if>
+      <if test="realmoney != null">
+        #{realmoney,jdbcType=REAL},
+      </if>
+      <if test="invoiceno != null">
+        #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="formula != null">
+        #{formula,jdbcType=VARCHAR},
+      </if>
+      <if test="contractnum != null">
+        #{contractnum,jdbcType=VARCHAR},
+      </if>
+      <if test="metertypeid != null">
+        #{metertypeid,jdbcType=INTEGER},
+      </if>
+      <if test="metername != null">
+        #{metername,jdbcType=VARCHAR},
+      </if>
+      <if test="maxvalue1 != null">
+        #{maxvalue1,jdbcType=INTEGER},
+      </if>
+      <if test="startvalue != null">
+        #{startvalue,jdbcType=INTEGER},
+      </if>
+      <if test="meterfactory != null">
+        #{meterfactory,jdbcType=VARCHAR},
+      </if>
+      <if test="docnum != null">
+        #{docnum,jdbcType=VARCHAR},
+      </if>
+      <if test="userno != null">
+        #{userno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.BeOrderuser">
+    update be_orderuser
+    <set>
+      <if test="orderno != null">
+        ORDERNO = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="smsphone != null">
+        SMSPHONE = #{smsphone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="projectmoney != null">
+        PROJECTMONEY = #{projectmoney,jdbcType=REAL},
+      </if>
+      <if test="realmoney != null">
+        REALMONEY = #{realmoney,jdbcType=REAL},
+      </if>
+      <if test="invoiceno != null">
+        INVOICENO = #{invoiceno,jdbcType=VARCHAR},
+      </if>
+      <if test="formula != null">
+        FORMULA = #{formula,jdbcType=VARCHAR},
+      </if>
+      <if test="contractnum != null">
+        CONTRACTNUM = #{contractnum,jdbcType=VARCHAR},
+      </if>
+      <if test="metertypeid != null">
+        METERTYPEID = #{metertypeid,jdbcType=INTEGER},
+      </if>
+      <if test="metername != null">
+        METERNAME = #{metername,jdbcType=VARCHAR},
+      </if>
+      <if test="maxvalue1 != null">
+        MAXVALUE1 = #{maxvalue1,jdbcType=INTEGER},
+      </if>
+      <if test="startvalue != null">
+        STARTVALUE = #{startvalue,jdbcType=INTEGER},
+      </if>
+      <if test="meterfactory != null">
+        METERFACTORY = #{meterfactory,jdbcType=VARCHAR},
+      </if>
+      <if test="docnum != null">
+        DOCNUM = #{docnum,jdbcType=VARCHAR},
+      </if>
+      <if test="userno != null">
+        USERNO = #{userno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.BeOrderuser">
+    update be_orderuser
+    set ORDERNO = #{orderno,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      SMSPHONE = #{smsphone,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      PROJECTMONEY = #{projectmoney,jdbcType=REAL},
+      REALMONEY = #{realmoney,jdbcType=REAL},
+      INVOICENO = #{invoiceno,jdbcType=VARCHAR},
+      FORMULA = #{formula,jdbcType=VARCHAR},
+      CONTRACTNUM = #{contractnum,jdbcType=VARCHAR},
+      METERTYPEID = #{metertypeid,jdbcType=INTEGER},
+      METERNAME = #{metername,jdbcType=VARCHAR},
+      MAXVALUE1 = #{maxvalue1,jdbcType=INTEGER},
+      STARTVALUE = #{startvalue,jdbcType=INTEGER},
+      METERFACTORY = #{meterfactory,jdbcType=VARCHAR},
+      DOCNUM = #{docnum,jdbcType=VARCHAR},
+      USERNO = #{userno,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

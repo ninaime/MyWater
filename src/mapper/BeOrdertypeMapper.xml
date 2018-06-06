@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BeOrdertypeMapper">
+  <resultMap id="BaseResultMap" type="model.BeOrdertype">
+    <id column="ORDERID" jdbcType="INTEGER" property="orderid" />
+    <result column="ORDERNAME" jdbcType="VARCHAR" property="ordername" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ORDERID, ORDERNAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from be_ordertype
+    where ORDERID = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from be_ordertype
+    where ORDERID = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.BeOrdertype">
+    insert into be_ordertype (ORDERID, ORDERNAME)
+    values (#{orderid,jdbcType=INTEGER}, #{ordername,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="model.BeOrdertype">
+    insert into be_ordertype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        ORDERID,
+      </if>
+      <if test="ordername != null">
+        ORDERNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="ordername != null">
+        #{ordername,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.BeOrdertype">
+    update be_ordertype
+    <set>
+      <if test="ordername != null">
+        ORDERNAME = #{ordername,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDERID = #{orderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.BeOrdertype">
+    update be_ordertype
+    set ORDERNAME = #{ordername,jdbcType=VARCHAR}
+    where ORDERID = #{orderid,jdbcType=INTEGER}
+  </update>
+</mapper>

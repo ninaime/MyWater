@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PyBilldetailMapper">
+  <resultMap id="BaseResultMap" type="model.PyBilldetail">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="BILLNO" jdbcType="VARCHAR" property="billno" />
+    <result column="USERNO" jdbcType="VARCHAR" property="userno" />
+    <result column="COSTTYPECODE" jdbcType="VARCHAR" property="costtypecode" />
+    <result column="AMOUNT" jdbcType="INTEGER" property="amount" />
+    <result column="PRICE" jdbcType="REAL" property="price" />
+    <result column="DETAILMONEY" jdbcType="REAL" property="detailmoney" />
+    <result column="REALMONEY" jdbcType="REAL" property="realmoney" />
+    <result column="BALANCE" jdbcType="INTEGER" property="balance" />
+    <result column="BALANCEDATE" jdbcType="DATE" property="balancedate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, BILLNO, USERNO, COSTTYPECODE, AMOUNT, PRICE, DETAILMONEY, REALMONEY, BALANCE, 
+    BALANCEDATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from py_billdetail
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from py_billdetail
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.PyBilldetail">
+    insert into py_billdetail (ID, BILLNO, USERNO, 
+      COSTTYPECODE, AMOUNT, PRICE, 
+      DETAILMONEY, REALMONEY, BALANCE, 
+      BALANCEDATE)
+    values (#{id,jdbcType=INTEGER}, #{billno,jdbcType=VARCHAR}, #{userno,jdbcType=VARCHAR}, 
+      #{costtypecode,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}, #{price,jdbcType=REAL}, 
+      #{detailmoney,jdbcType=REAL}, #{realmoney,jdbcType=REAL}, #{balance,jdbcType=INTEGER}, 
+      #{balancedate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="model.PyBilldetail">
+    insert into py_billdetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="billno != null">
+        BILLNO,
+      </if>
+      <if test="userno != null">
+        USERNO,
+      </if>
+      <if test="costtypecode != null">
+        COSTTYPECODE,
+      </if>
+      <if test="amount != null">
+        AMOUNT,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="detailmoney != null">
+        DETAILMONEY,
+      </if>
+      <if test="realmoney != null">
+        REALMONEY,
+      </if>
+      <if test="balance != null">
+        BALANCE,
+      </if>
+      <if test="balancedate != null">
+        BALANCEDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="billno != null">
+        #{billno,jdbcType=VARCHAR},
+      </if>
+      <if test="userno != null">
+        #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="costtypecode != null">
+        #{costtypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="detailmoney != null">
+        #{detailmoney,jdbcType=REAL},
+      </if>
+      <if test="realmoney != null">
+        #{realmoney,jdbcType=REAL},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=INTEGER},
+      </if>
+      <if test="balancedate != null">
+        #{balancedate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.PyBilldetail">
+    update py_billdetail
+    <set>
+      <if test="billno != null">
+        BILLNO = #{billno,jdbcType=VARCHAR},
+      </if>
+      <if test="userno != null">
+        USERNO = #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="costtypecode != null">
+        COSTTYPECODE = #{costtypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        AMOUNT = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=REAL},
+      </if>
+      <if test="detailmoney != null">
+        DETAILMONEY = #{detailmoney,jdbcType=REAL},
+      </if>
+      <if test="realmoney != null">
+        REALMONEY = #{realmoney,jdbcType=REAL},
+      </if>
+      <if test="balance != null">
+        BALANCE = #{balance,jdbcType=INTEGER},
+      </if>
+      <if test="balancedate != null">
+        BALANCEDATE = #{balancedate,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.PyBilldetail">
+    update py_billdetail
+    set BILLNO = #{billno,jdbcType=VARCHAR},
+      USERNO = #{userno,jdbcType=VARCHAR},
+      COSTTYPECODE = #{costtypecode,jdbcType=VARCHAR},
+      AMOUNT = #{amount,jdbcType=INTEGER},
+      PRICE = #{price,jdbcType=REAL},
+      DETAILMONEY = #{detailmoney,jdbcType=REAL},
+      REALMONEY = #{realmoney,jdbcType=REAL},
+      BALANCE = #{balance,jdbcType=INTEGER},
+      BALANCEDATE = #{balancedate,jdbcType=DATE}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

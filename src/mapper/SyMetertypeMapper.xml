@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.SyMetertypeMapper">
+  <resultMap id="BaseResultMap" type="model.SyMetertype">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="METERTYPENAME" jdbcType="VARCHAR" property="metertypename" />
+    <result column="APERTURE" jdbcType="INTEGER" property="aperture" />
+    <result column="MAVVALUE" jdbcType="INTEGER" property="mavvalue" />
+    <result column="MINVALUE" jdbcType="INTEGER" property="minvalue" />
+    <result column="LIFE" jdbcType="INTEGER" property="life" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="DISABLED" jdbcType="INTEGER" property="disabled" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, METERTYPENAME, APERTURE, MAVVALUE, MINVALUE, LIFE, REMARK, DISABLED
+  </sql>
+  
+  <!--查询所有可使用的费用类型 -->
+  <select id="findSyMeterType" resultType="model.SyMetertype">
+	select * from SY_MeterType where Disabled=0
+  </select>
+  
+  <!-- 总条数 -->
+	<select id="count" resultType="int">
+		select count(*) from Sy_metertype where disabled=0
+	</select>
+  
+  <!-- 查询全部 -->
+  <select id="findAll" resultType="model.SyMetertype" parameterType="model.Page">
+   	select * from Sy_metertype where disabled=0 LIMIT #{start},#{count}
+  </select>
+  
+  <!-- 添加 -->
+  <insert id="addMetertype" parameterType="model.SyMetertype">
+	insert into Sy_metertype(meterTypeName,aperture,mavValue,minValue,life,remark,disabled)
+	values(#{metertypename},#{aperture},#{mavvalue},#{minvalue},#{life},#{remark},0)
+  </insert>
+
+  <!-- 删除就是把状态为0的改为1 -->
+  <delete id="delMetertype" parameterType="int">
+	update Sy_metertype set disabled=1 where id=#{id}
+  </delete>
+
+  <!-- 根据ID查询 -->
+  <select id="findById" parameterType="int" resultType="model.SyMetertype">
+	select * from Sy_metertype where id=#{id}
+  </select>
+
+  <!-- 修改 -->
+  <update id="updMetertype" parameterType="model.SyMetertype">
+	update Sy_metertype set meterTypeName=#{metertypename},aperture=#{aperture},
+	mavValue=#{mavvalue},minValue=#{minvalue},life=#{life},remark=#{remark}
+	where id=#{id}
+  </update> 
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sy_metertype
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sy_metertype
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.SyMetertype">
+    insert into sy_metertype (ID, METERTYPENAME, APERTURE, 
+      MAVVALUE, MINVALUE, LIFE, 
+      REMARK, DISABLED)
+    values (#{id,jdbcType=INTEGER}, #{metertypename,jdbcType=VARCHAR}, #{aperture,jdbcType=INTEGER}, 
+      #{mavvalue,jdbcType=INTEGER}, #{minvalue,jdbcType=INTEGER}, #{life,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{disabled,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="model.SyMetertype">
+    insert into sy_metertype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="metertypename != null">
+        METERTYPENAME,
+      </if>
+      <if test="aperture != null">
+        APERTURE,
+      </if>
+      <if test="mavvalue != null">
+        MAVVALUE,
+      </if>
+      <if test="minvalue != null">
+        MINVALUE,
+      </if>
+      <if test="life != null">
+        LIFE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="disabled != null">
+        DISABLED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="metertypename != null">
+        #{metertypename,jdbcType=VARCHAR},
+      </if>
+      <if test="aperture != null">
+        #{aperture,jdbcType=INTEGER},
+      </if>
+      <if test="mavvalue != null">
+        #{mavvalue,jdbcType=INTEGER},
+      </if>
+      <if test="minvalue != null">
+        #{minvalue,jdbcType=INTEGER},
+      </if>
+      <if test="life != null">
+        #{life,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        #{disabled,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.SyMetertype">
+    update sy_metertype
+    <set>
+      <if test="metertypename != null">
+        METERTYPENAME = #{metertypename,jdbcType=VARCHAR},
+      </if>
+      <if test="aperture != null">
+        APERTURE = #{aperture,jdbcType=INTEGER},
+      </if>
+      <if test="mavvalue != null">
+        MAVVALUE = #{mavvalue,jdbcType=INTEGER},
+      </if>
+      <if test="minvalue != null">
+        MINVALUE = #{minvalue,jdbcType=INTEGER},
+      </if>
+      <if test="life != null">
+        LIFE = #{life,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        DISABLED = #{disabled,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.SyMetertype">
+    update sy_metertype
+    set METERTYPENAME = #{metertypename,jdbcType=VARCHAR},
+      APERTURE = #{aperture,jdbcType=INTEGER},
+      MAVVALUE = #{mavvalue,jdbcType=INTEGER},
+      MINVALUE = #{minvalue,jdbcType=INTEGER},
+      LIFE = #{life,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DISABLED = #{disabled,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

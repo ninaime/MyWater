@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.SyCosttypeMapper">
+  <resultMap id="BaseResultMap" type="model.SyCosttype">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="KIND" jdbcType="INTEGER" property="kind" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="COSTTYPENAME" jdbcType="VARCHAR" property="costtypename" />
+    <result column="FULLNAME" jdbcType="VARCHAR" property="fullname" />
+    <result column="PRICE" jdbcType="REAL" property="price" />
+    <result column="SURCHARGETEXT" jdbcType="VARCHAR" property="surchargetext" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="DISABLED" jdbcType="INTEGER" property="disabled" />
+  </resultMap>
+  <insert id="insert" parameterType="model.SyCosttype">
+    insert into sy_costtype (ID, KIND, CODE, 
+      COSTTYPENAME, FULLNAME, PRICE, 
+      SURCHARGETEXT, REMARK, DISABLED
+      )
+    values (#{id,jdbcType=INTEGER}, #{kind,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, 
+      #{costtypename,jdbcType=VARCHAR}, #{fullname,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, 
+      #{surchargetext,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{disabled,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="model.SyCosttype">
+    insert into sy_costtype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="kind != null">
+        KIND,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="costtypename != null">
+        COSTTYPENAME,
+      </if>
+      <if test="fullname != null">
+        FULLNAME,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="surchargetext != null">
+        SURCHARGETEXT,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="disabled != null">
+        DISABLED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="kind != null">
+        #{kind,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="costtypename != null">
+        #{costtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null">
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="surchargetext != null">
+        #{surchargetext,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="disabled != null">
+        #{disabled,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

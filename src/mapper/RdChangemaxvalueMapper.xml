@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.RdChangemaxvalueMapper">
+  <resultMap id="BaseResultMap" type="model.RdChangemaxvalue">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="DATEE" jdbcType="DATE" property="datee" />
+    <result column="EMPID" jdbcType="INTEGER" property="empid" />
+    <result column="USERNO" jdbcType="VARCHAR" property="userno" />
+    <result column="METERNO" jdbcType="VARCHAR" property="meterno" />
+    <result column="MAXVALUE1" jdbcType="INTEGER" property="maxvalue1" />
+    <result column="MAXVALUE2" jdbcType="INTEGER" property="maxvalue2" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, DATEE, EMPID, USERNO, METERNO, MAXVALUE1, MAXVALUE2, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rd_changemaxvalue
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rd_changemaxvalue
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.RdChangemaxvalue">
+    insert into rd_changemaxvalue (ID, DATEE, EMPID, 
+      USERNO, METERNO, MAXVALUE1, 
+      MAXVALUE2, REMARK)
+    values (#{id,jdbcType=INTEGER}, #{datee,jdbcType=DATE}, #{empid,jdbcType=INTEGER}, 
+      #{userno,jdbcType=VARCHAR}, #{meterno,jdbcType=VARCHAR}, #{maxvalue1,jdbcType=INTEGER}, 
+      #{maxvalue2,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="model.RdChangemaxvalue">
+    insert into rd_changemaxvalue
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="datee != null">
+        DATEE,
+      </if>
+      <if test="empid != null">
+        EMPID,
+      </if>
+      <if test="userno != null">
+        USERNO,
+      </if>
+      <if test="meterno != null">
+        METERNO,
+      </if>
+      <if test="maxvalue1 != null">
+        MAXVALUE1,
+      </if>
+      <if test="maxvalue2 != null">
+        MAXVALUE2,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="datee != null">
+        #{datee,jdbcType=DATE},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="userno != null">
+        #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="meterno != null">
+        #{meterno,jdbcType=VARCHAR},
+      </if>
+      <if test="maxvalue1 != null">
+        #{maxvalue1,jdbcType=INTEGER},
+      </if>
+      <if test="maxvalue2 != null">
+        #{maxvalue2,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.RdChangemaxvalue">
+    update rd_changemaxvalue
+    <set>
+      <if test="datee != null">
+        DATEE = #{datee,jdbcType=DATE},
+      </if>
+      <if test="empid != null">
+        EMPID = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="userno != null">
+        USERNO = #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="meterno != null">
+        METERNO = #{meterno,jdbcType=VARCHAR},
+      </if>
+      <if test="maxvalue1 != null">
+        MAXVALUE1 = #{maxvalue1,jdbcType=INTEGER},
+      </if>
+      <if test="maxvalue2 != null">
+        MAXVALUE2 = #{maxvalue2,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.RdChangemaxvalue">
+    update rd_changemaxvalue
+    set DATEE = #{datee,jdbcType=DATE},
+      EMPID = #{empid,jdbcType=INTEGER},
+      USERNO = #{userno,jdbcType=VARCHAR},
+      METERNO = #{meterno,jdbcType=VARCHAR},
+      MAXVALUE1 = #{maxvalue1,jdbcType=INTEGER},
+      MAXVALUE2 = #{maxvalue2,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

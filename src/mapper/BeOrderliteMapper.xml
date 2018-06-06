@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BeOrderliteMapper">
+  <resultMap id="BaseResultMap" type="model.BeOrderlite">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="ORDERTYPE" jdbcType="INTEGER" property="ordertype" />
+    <result column="DATEE" jdbcType="DATE" property="datee" />
+    <result column="EMPID" jdbcType="INTEGER" property="empid" />
+    <result column="USERNO" jdbcType="VARCHAR" property="userno" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ORDERTYPE, DATEE, EMPID, USERNO, USERNAME, DESCRIPTION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from be_orderlite
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from be_orderlite
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="model.BeOrderlite">
+    insert into be_orderlite (ID, ORDERTYPE, DATEE, 
+      EMPID, USERNO, USERNAME, 
+      DESCRIPTION)
+    values (#{id,jdbcType=INTEGER}, #{ordertype,jdbcType=INTEGER}, #{datee,jdbcType=DATE}, 
+      #{empid,jdbcType=INTEGER}, #{userno,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="model.BeOrderlite">
+    insert into be_orderlite
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="ordertype != null">
+        ORDERTYPE,
+      </if>
+      <if test="datee != null">
+        DATEE,
+      </if>
+      <if test="empid != null">
+        EMPID,
+      </if>
+      <if test="userno != null">
+        USERNO,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ordertype != null">
+        #{ordertype,jdbcType=INTEGER},
+      </if>
+      <if test="datee != null">
+        #{datee,jdbcType=DATE},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="userno != null">
+        #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="model.BeOrderlite">
+    update be_orderlite
+    <set>
+      <if test="ordertype != null">
+        ORDERTYPE = #{ordertype,jdbcType=INTEGER},
+      </if>
+      <if test="datee != null">
+        DATEE = #{datee,jdbcType=DATE},
+      </if>
+      <if test="empid != null">
+        EMPID = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="userno != null">
+        USERNO = #{userno,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="model.BeOrderlite">
+    update be_orderlite
+    set ORDERTYPE = #{ordertype,jdbcType=INTEGER},
+      DATEE = #{datee,jdbcType=DATE},
+      EMPID = #{empid,jdbcType=INTEGER},
+      USERNO = #{userno,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

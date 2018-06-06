@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.RdYearmonthMapper">
+  <resultMap id="BaseResultMap" type="model.RdYearmonth">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="READYEAR" jdbcType="INTEGER" property="readyear" />
+    <result column="READMONTH" jdbcType="INTEGER" property="readmonth" />
+    <result column="ISCURRENT" jdbcType="INTEGER" property="iscurrent" />
+    <result column="INITEMPID" jdbcType="INTEGER" property="initempid" />
+    <result column="INITDATE" jdbcType="DATE" property="initdate" />
+    <result column="ENDDATE" jdbcType="DATE" property="enddate" />
+  </resultMap>
+  <insert id="insert" parameterType="model.RdYearmonth">
+    insert into rd_yearmonth (ID, READYEAR, READMONTH, 
+      ISCURRENT, INITEMPID, INITDATE, 
+      ENDDATE)
+    values (#{id,jdbcType=INTEGER}, #{readyear,jdbcType=INTEGER}, #{readmonth,jdbcType=INTEGER}, 
+      #{iscurrent,jdbcType=INTEGER}, #{initempid,jdbcType=INTEGER}, #{initdate,jdbcType=DATE}, 
+      #{enddate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="model.RdYearmonth">
+    insert into rd_yearmonth
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="readyear != null">
+        READYEAR,
+      </if>
+      <if test="readmonth != null">
+        READMONTH,
+      </if>
+      <if test="iscurrent != null">
+        ISCURRENT,
+      </if>
+      <if test="initempid != null">
+        INITEMPID,
+      </if>
+      <if test="initdate != null">
+        INITDATE,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="readyear != null">
+        #{readyear,jdbcType=INTEGER},
+      </if>
+      <if test="readmonth != null">
+        #{readmonth,jdbcType=INTEGER},
+      </if>
+      <if test="iscurrent != null">
+        #{iscurrent,jdbcType=INTEGER},
+      </if>
+      <if test="initempid != null">
+        #{initempid,jdbcType=INTEGER},
+      </if>
+      <if test="initdate != null">
+        #{initdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>
